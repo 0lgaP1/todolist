@@ -11,7 +11,7 @@ export type TodoListPropsType = {
 
 export const Todolist = ({title, tasks}: TodoListPropsType) => {
     return (
-        <div>
+        <div className="todolist">
             <h3>{title}</h3>
             <div>
                 <input/>

@@ -8,7 +8,7 @@ export type TaskType = {
     isDone: boolean,
 }
 
-function App() {
+function App () {
 
     const TodoListTitle = ["What to read", "What to buy", "What to learn"]
 
