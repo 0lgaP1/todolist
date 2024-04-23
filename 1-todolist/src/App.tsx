@@ -1,12 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Todolist} from "./Todolist";
-
-export type TaskType = {
-    id: number,
-    title: string,
-    isDone: boolean,
-}
+import {TaskType, Todolist} from "./Todolist";
 
 function App () {
 
@@ -16,6 +10,9 @@ function App () {
         {id: 1, title: "HTML", isDone: true},
         {id: 2, title: "JS/TS", isDone: true},
         {id: 3, title: "React", isDone: false},
+        {id: 4, title: "Redux", isDone: false},
+        {id: 5, title: 'Typescript', isDone: false },
+        {id: 6, title: 'RTK query', isDone: false },
     ]
     const tasks2: Array<TaskType> = [
         {id: 1, title: "Hello world", isDone: true},
@@ -26,7 +23,7 @@ function App () {
     return (
         <div className="App">
             <Todolist title={TodoListTitle[0]} />
-            <Todolist title={TodoListTitle[1]} tasks={tasks1}/>
+            <Todolist title={TodoListTitle[1]} tasks={tasks1} date={"23.04.2024"}/>
             <Todolist title={TodoListTitle[2]} tasks={tasks2}/>
         </div>
     );

@@ -1,46 +1,45 @@
 import React from 'react';
 import {Button} from "./Button";
-import {TaskType} from "./App";
 
 
 export type TodoListPropsType = {
     title?: string,
-    tasks?: TaskType[];
+    tasks?: TaskType[],
+    date?: string,
 }
 
+export type TaskType = {
+    id: number,
+    title: string,
+    isDone: boolean,
+}
 
-export const Todolist = ({title, tasks}: TodoListPropsType) => {
+export const Todolist = ({title, tasks, date}: TodoListPropsType) => {
     return (
         <div className="todolist">
             <h3>{title}</h3>
             <div>
                 <input/>
                 <Button title="+"/>
-                {/*<button>+</button>*/}
+                <div>{date}</div>
             </div>
             <ul>
-                {tasks && tasks.length > 0 && (
-                    <>
+                {tasks && tasks.map(task => {
+                    debugger
+                    return (
                         <li>
-                            <input type="checkbox" checked={tasks[0].isDone}/>
-                            <span>{tasks[0].title}</span>
+                            <input type="checkbox" checked={task.isDone}/>
+                            <span>{task.title}</span>
                         </li>
-                        <li>
-                            <input type="checkbox" checked={tasks[1].isDone}/>
-                            <span>{tasks[1].title}</span>
-                        </li>
-                        <li>
-                            <input type="checkbox" checked={tasks[2].isDone}/>
-                            <span>{tasks[2].title}</span>
-                        </li>
-                    </>
-                )}
+                    )
+                })}
             </ul>
-                    <div>
-                    <Button title="All"/>
-                    <Button title="Active"/>
-                    <Button title="Completed"/>
-                    </div>
-                    </div>
-                    );
-                };
+            <div>
+                <Button title="All"/>
+                <Button title="Active"/>
+                <Button title="Completed"/>
+            </div>
+
+        </div>
+    );
+};
