@@ -23,17 +23,20 @@ export const Todolist = ({title, tasks, date}: TodoListPropsType) => {
                 <Button title="+"/>
                 <div>{date}</div>
             </div>
-            <ul>
-                {tasks && tasks.map(task => {
-                    debugger
-                    return (
-                        <li>
-                            <input type="checkbox" checked={task.isDone}/>
-                            <span>{task.title}</span>
-                        </li>
-                    )
-                })}
-            </ul>
+            {tasks && tasks.length === 0? (
+                <p>No tasks here</p>
+            ) : (
+                <ul>
+                    {tasks && tasks.map(task => {
+                        return (
+                            <li key={task.id}>
+                                <input type="checkbox" checked={task.isDone}/>
+                                <span>{task.title}</span>
+                            </li>
+                        )
+                    })}
+                </ul>
+            )}
             <div>
                 <Button title="All"/>
                 <Button title="Active"/>
