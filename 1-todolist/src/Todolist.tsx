@@ -6,12 +6,15 @@ export type TodoListPropsType = {
     title?: string,
     tasks?: TaskType[],
     date?: string,
+    removeTask: (taskId: number) => void
+
 }
 
 export type TaskType = {
     id: number,
     title: string,
     isDone: boolean,
+
 }
 
 export const Todolist = ({title, tasks, date}: TodoListPropsType) => {
@@ -32,6 +35,7 @@ export const Todolist = ({title, tasks, date}: TodoListPropsType) => {
                             <li key={task.id}>
                                 <input type="checkbox" checked={task.isDone}/>
                                 <span>{task.title}</span>
+                                <button title="x" onClick={() => alert(task.id)}>x</button>
                             </li>
                         )
                     })}

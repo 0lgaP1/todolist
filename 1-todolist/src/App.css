@@ -10,4 +10,5 @@
 .todolist {
   background-color: crimson;
   padding: 20px;
+  min-width: 500px;
 }
