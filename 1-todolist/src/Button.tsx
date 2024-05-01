@@ -1,15 +1,16 @@
 import React from 'react';
 
 type ButtonPropsType = {
-    title: string;
+    title: string
+    onClick?: () => void
 }
 export const Button = (props: ButtonPropsType) => {
     return (
-        <div>
+
             <button>
                 <span>{props.title}</span>
             </button>
-        </div>
+
 
     );
 };
