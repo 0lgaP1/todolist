@@ -21,10 +21,19 @@ function App() {
         setTasks(filteredTasks)
     }
 
+    const [filter, setFilter] = useState('all')
+    let tasksForTodolist = tasks
+    if (filter === 'active') {
+        tasksForTodolist = tasks.filter(task => !task.isDone) // task.isDone === false
+    }
+    if (filter === 'completed') {
+        tasksForTodolist = tasks.filter(task => task.isDone) // task.isDone === true
+    }
+
     return (
         <div className="App">
             <Todolist title="What to read"
-                      tasks={tasks}
+                      tasks={tasksForTodolist}
                       removeTask={removeTask}/>
         </div>
     );
