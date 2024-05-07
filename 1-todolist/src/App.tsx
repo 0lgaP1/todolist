@@ -42,7 +42,7 @@ function App() {
             title: title,
             isDone: false,
         }
-    const newTaskState = [newTask, ...tasks]
+const newTaskState = [newTask, ...tasks]
         setTasks(newTaskState)
     }
 

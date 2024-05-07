@@ -30,7 +30,7 @@ export const Todolist = ({title, tasks, date, addTask, removeTask, changeFilter}
         <div className="todolist">
             <h3>{title}</h3>
             <div>
-                <input ref={inputRef}/>
+                <input ref={inputRef} onChange={ () => {}}/>
                 <Button title="+" onClick={addTaskHandler}/>
                 <div>{date}</div>
             </div>
