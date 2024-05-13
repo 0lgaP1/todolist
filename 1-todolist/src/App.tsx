@@ -3,11 +3,9 @@ import './App.css';
 import {TaskType, Todolist} from "./Todolist";
 import {v1} from "uuid";
 
-export type filterNamingType = 'all' | 'active' | 'completed'
-
 function App() {
 
-    // const TodoListTitle = ["What to read", "What to buy", "What to learn", "What to listen"]
+// const TodoListTitle = ["What to read", "What to buy", "What to learn", "What to listen"]
     let [tasks, setTasks] = useState<TaskType[]>([
         {id: v1(), title: "HTML", isDone: true},
         {id: v1(), title: "JS/TS", isDone: true},
@@ -16,21 +14,10 @@ function App() {
         {id: v1(), title: 'Typescript', isDone: false},
         {id: v1(), title: 'RTK query', isDone: false},
     ])
-    const removeTask = (taskId: string) => {
-        const filteredTasks = tasks.filter(task => {
-            return task.id !== taskId
-        })
-        setTasks(filteredTasks)
-    }
-
+    type filterNamingType = 'all' | 'active' | 'completed'
     const [filter, setFilter] = useState<filterNamingType>('all')
-    let tasksForTodolist = tasks
-    if (filter === 'active') {
-        tasksForTodolist = tasks.filter(task => !task.isDone) // task.isDone === false
-    }
-    if (filter === 'completed') {
-        tasksForTodolist = tasks.filter(task => task.isDone) // task.isDone === true
-    }
+    const [taskTitle, setTaskTitle] = useState("")
+    console.log(taskTitle)
 
     const changeFilter = (filter: filterNamingType) => {
         setFilter(filter)
@@ -42,8 +29,17 @@ function App() {
             title: title,
             isDone: false,
         }
-const newTaskState = [newTask, ...tasks]
+        const newTaskState = [newTask, ...tasks]
         setTasks(newTaskState)
+    }
+    const removeTask = (taskId: string) => {
+        const filteredTasks = tasks.filter(task => {
+            return task.id !== taskId
+        })
+        setTasks(filteredTasks)
+    }
+
+    const addTaskHandler = () => {
     }
 
     return (
@@ -56,6 +52,5 @@ const newTaskState = [newTask, ...tasks]
         </div>
     );
 }
-
 
 export default App;

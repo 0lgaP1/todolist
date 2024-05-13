@@ -14,11 +14,11 @@ const StyledBtn = styled.button`
 `
 type ButtonPropsType = {
     title: string
-    onClick?: () => void
-    disable?: boolean
+    onClickHandler?: () => void
+    disabled?: boolean
 }
-export const Button = ({title, onClick}: ButtonPropsType) => {
+export const Button = ({title, onClickHandler, disabled}: ButtonPropsType) => {
     return (
-            <StyledBtn onClick={onClick} >{title}</StyledBtn>
+            <StyledBtn onClick={onClickHandler} disabled={disabled}>{title}</StyledBtn>
     );
 };

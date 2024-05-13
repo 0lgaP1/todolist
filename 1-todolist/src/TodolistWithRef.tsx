@@ -1,7 +1,6 @@
 import React, {useRef} from 'react';
 import {Button} from "./Button";
-import {filterNamingType} from "./App";
-
+import {filterNamingType} from "./App"
 export type TodoListPropsType = {
     title?: string
     tasks?: TaskType[]
@@ -31,7 +30,7 @@ export const Todolist = ({title, tasks, date, addTask, removeTask, changeFilter}
             <h3>{title}</h3>
             <div>
                 <input ref={inputRef}/>
-                <Button title="+" onClick={addTaskHandler}/>
+                <Button title="+" onClickHandler={addTaskHandler}/>
                 <div>{date}</div>
             </div>
             {tasks && tasks.length === 0 ? (
@@ -50,9 +49,9 @@ export const Todolist = ({title, tasks, date, addTask, removeTask, changeFilter}
                 </ul>
             )}
             <div>
-                <Button title={'All'} onClick={() => changeFilter('all')}/>
-                <Button title={'active'} onClick={() => changeFilter('active')}/>
-                <Button title={'completed'} onClick={() => changeFilter('completed')}/>
+                <Button title={'All'} onClickHandler={() => changeFilter('all')}/>
+                <Button title={'active'} onClickHandler={() => changeFilter('active')}/>
+                <Button title={'completed'} onClickHandler={() => changeFilter('completed')}/>
             </div>
         </div>
     );
