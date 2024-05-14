@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button} from "./Button";
-import {addTaskHandler, filterNamingType, setTaskTitle, taskTitle} from "./App";
+import {filterNamingType} from "./App";
 
 export type TodoListPropsType = {
-    title?: string
-    tasks?: TaskType[]
+    title: string
+    tasks: TaskType[]
     date?: string
     addTask: (title: string) => void
     removeTask: (taskId: string) => void
@@ -27,14 +27,20 @@ export function Todolist(props: TodoListPropsType) {
         changeFilter
     } = props
 
+    const [taskTitle, setTaskTitle] = useState("")
+    console.log(taskTitle)
+
+    const addTaskHandler = () => {
+        addTask(taskTitle);
+        setTaskTitle('');
+    }
+
     return (
         <div className="todolist">
             <h3>{title}</h3>
             <div>
                 <input value={taskTitle}
-                       onChange={(e) => {
-                           setTaskTitle(e.currentTarget.value)
-                       }}/>
+                       onChange={(e) => {setTaskTitle(e.currentTarget.value)}}/>
                 <Button title="+"
                         onClickHandler={addTaskHandler}
                         disabled={taskTitle.length === 0 || taskTitle.length > 15}

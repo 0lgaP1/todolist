@@ -3,6 +3,8 @@ import './App.css';
 import {TaskType, Todolist} from "./Todolist";
 import {v1} from "uuid";
 
+export type filterNamingType = 'all' | 'active' | 'completed'
+
 function App() {
 
 // const TodoListTitle = ["What to read", "What to buy", "What to learn", "What to listen"]
@@ -14,11 +16,8 @@ function App() {
         {id: v1(), title: 'Typescript', isDone: false},
         {id: v1(), title: 'RTK query', isDone: false},
     ])
-    type filterNamingType = 'all' | 'active' | 'completed'
-    const [filter, setFilter] = useState<filterNamingType>('all')
-    const [taskTitle, setTaskTitle] = useState("")
-    console.log(taskTitle)
 
+    const [filter, setFilter] = useState<filterNamingType>('all')
     const changeFilter = (filter: filterNamingType) => {
         setFilter(filter)
     }
@@ -39,13 +38,10 @@ function App() {
         setTasks(filteredTasks)
     }
 
-    const addTaskHandler = () => {
-    }
-
     return (
         <div className="App">
             <Todolist title="What to read"
-                      tasks={tasksForTodolist}
+                      tasks={tasks}
                       addTask={addTask}
                       removeTask={removeTask}
                       changeFilter={changeFilter}/>
