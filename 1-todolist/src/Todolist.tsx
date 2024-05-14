@@ -40,7 +40,12 @@ export function Todolist(props: TodoListPropsType) {
             <h3>{title}</h3>
             <div>
                 <input value={taskTitle}
-                       onChange={(e) => {setTaskTitle(e.currentTarget.value)}}/>
+                       onChange={(e) => {setTaskTitle(e.currentTarget.value)}}
+                       onKeyUp={e => {
+                           if(e.key === "Enter") {
+                               addTaskHandler()
+                           }
+                       }}/>
                 <Button title="+"
                         onClickHandler={addTaskHandler}
                         disabled={taskTitle.length === 0 || taskTitle.length > 15}
