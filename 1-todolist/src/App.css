@@ -8,7 +8,8 @@
 }
 
 .todolist {
-  background-color: crimson;
+  background-color: #ffaa31;
   padding: 20px;
   min-width: 500px;
+  /*list-style: none;*/
 }

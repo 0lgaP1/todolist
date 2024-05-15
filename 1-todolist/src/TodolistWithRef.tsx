@@ -1,13 +1,13 @@
 import React, {useRef} from 'react';
 import {Button} from "./Button";
-import {filterNamingType} from "./App"
+import {FilterValuesType} from "./App"
 export type TodoListPropsType = {
     title?: string
     tasks?: TaskType[]
     date?: string
     addTask: (title: string) => void
     removeTask: (taskId: string) => void
-    changeFilter: (filter: filterNamingType) => void
+    changeFilter: (filter: FilterValuesType) => void
 }
 
 export type TaskType = {

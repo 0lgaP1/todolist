@@ -9,7 +9,11 @@ const StyledBtn = styled.button`
     gap: 8px;
 
     &:hover {
-        background-color: #0056b3;
+        background-color: #436cef;
+    }
+
+    &:disabled {
+        background-color: #ccc;
     }
 `
 type ButtonPropsType = {

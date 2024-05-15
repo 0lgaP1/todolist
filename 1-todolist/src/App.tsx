@@ -1,14 +1,23 @@
 import React, {useState} from 'react';
 import './App.css';
-import {TaskType, Todolist} from "./Todolist";
+import {Todolist} from "./Todolist";
 import {v1} from "uuid";
-
-export type filterNamingType = 'all' | 'active' | 'completed'
-
+//crud:
+//c - create
+//r - read (view mode, filter, sort, search, pagination)
+//u - update (change task title, change task status : isDone)
+//d - delete
+export type FilterValuesType = 'all' | 'active' | 'completed'
+export type TaskType = {
+    id: string
+    title: string
+    isDone: boolean
+}
 function App() {
-
-// const TodoListTitle = ["What to read", "What to buy", "What to learn", "What to listen"]
-    let [tasks, setTasks] = useState<TaskType[]>([
+//Data
+// BLL
+    const todoListTitle: string = "What to read"
+    const [tasks, setTasks] = useState([
         {id: v1(), title: "HTML", isDone: true},
         {id: v1(), title: "JS/TS", isDone: true},
         {id: v1(), title: "React", isDone: false},
@@ -16,35 +25,39 @@ function App() {
         {id: v1(), title: 'Typescript', isDone: false},
         {id: v1(), title: 'RTK query', isDone: false},
     ])
-
-    const [filter, setFilter] = useState<filterNamingType>('all')
-    const changeFilter = (filter: filterNamingType) => {
-        setFilter(filter)
-    }
-
+// change logic:
+// create form CRUD operations - addTask
     const addTask = (title: string) => {
-        const newTask: TaskType = {
-            id: v1(),
-            title: title,
-            isDone: false,
-        }
-        const newTaskState = [newTask, ...tasks]
-        setTasks(newTaskState)
+        setTasks([{id: v1(), title, isDone: false}, ...tasks])
     }
-    const removeTask = (taskId: string) => {
-        const filteredTasks = tasks.filter(task => {
-            return task.id !== taskId
-        })
-        setTasks(filteredTasks)
+// U update from CRUD - changeTaskStatus
+    const changeTaskStatus = (taskId: string) => {
+        const nextState: Array<TaskType> = tasks.map(t => t.id === taskId ? {...t, isDone: !t.isDone} : t)
+        setTasks(nextState)
     }
 
-    return (
+// D delete from CRUD - removeTask
+    const removeTask = (taskId: string) => {
+        const nextState: any = []
+        for (let i = 0; i < tasks.length; i++) {
+            if (tasks[i].id != taskId) {
+                nextState.push(tasks[i])
+            }
+        }
+        console.log(nextState)
+        setTasks(nextState)
+    }
+
+// UI:
+      return (
         <div className="App">
-            <Todolist title="What to read"
+            <Todolist title={todoListTitle}
                       tasks={tasks}
                       addTask={addTask}
                       removeTask={removeTask}
-                      changeFilter={changeFilter}/>
+                      changeTaskStatus={changeTaskStatus}
+                      //changeFilter={changeFilter}
+            />
         </div>
     );
 }
