@@ -37,7 +37,7 @@ function App() {
         //if(taskForUpdate){
         //        taskForUpdate.isDone = !taskForUpdate.isDone
         //        }
-        //setTasks([...tasks]) - метод find работает имутабельно, но, в отл от filter, не создает новый массив, содержащий 1 таску, а только новый объект с 1 таской
+        //setTasks([...tasks]) - метод find работает имутабельно, но, в отл от filter, не создает новый массив, содержащий 1 таску, а только новый объект с 1 таской -> лучше для оптимизации
         const nextState: Array<TaskType> = tasks.map(t => t.id === taskId ? {...t, isDone: newIsDoneValue} : t)
         setTasks(nextState)
     }

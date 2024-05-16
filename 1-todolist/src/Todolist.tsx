@@ -75,7 +75,7 @@ const tasklist: JSX.Element = filteredTasks.length === 0
                             checked={task.isDone}
                             onChange={changeTaskStatusHandler}
                         />
-                        <span>{task.title}</span>
+                        <span className={task.isDone ? "task-done" : "task"}>{task.title}</span>
                         <Button
                             title="x"
                             onClickHandler={removeTaskHandler}/>
@@ -101,9 +101,18 @@ const tasklist: JSX.Element = filteredTasks.length === 0
             </div>
             {tasklist}
             <div>
-                <Button title={'All'} onClickHandler={() => changeFilter('all')}/>
-                <Button title={'Active'} onClickHandler={() => changeFilter('active')}/>
-                <Button title={'Completed'} onClickHandler={() => changeFilter('completed')}/>
+                <Button
+                    title={'All'}
+                    onClickHandler={() => changeFilter('all')}
+                    classes={filter === "all" ? "btn-filter-active" : ""}/>
+                <Button
+                    title={'Active'}
+                    onClickHandler={() => changeFilter('active')}
+                    classes={filter === "active" ? "btn-filter-active" : ""}/>
+                <Button
+                    title={'Completed'}
+                    onClickHandler={() => changeFilter('completed')}
+                    classes={filter === "completed" ? "btn-filter-active" : ""}/>
             </div>
         </div>
     )}
