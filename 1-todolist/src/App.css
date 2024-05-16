@@ -33,6 +33,10 @@ li:not(:last-child) {
     opacity: 0.5;
 }
 
+.task-input-error {
+    border: 2px solid red;
+}
+
 .btn-filter-active {
     background-color: rgb(156, 178, 29);
 }
@@ -50,3 +54,4 @@ button {
         background-color: #436cef;
     }
 }
+

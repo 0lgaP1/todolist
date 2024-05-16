@@ -26,6 +26,8 @@ export function Todolist(props: TodoListPropsType) {
     // UI LOGIC
     const [filter, setFilter] = useState<FilterValuesType>("all")
     const [taskTitle, setTaskTitle] = useState("")
+    const [error, setError] = useState<string | null>(null)
+
     console.log(taskTitle)
 
     const changeFilter = (filter: FilterValuesType) => {
@@ -36,9 +38,9 @@ export function Todolist(props: TodoListPropsType) {
         (allTasks: Array<TaskType>, filterValue: FilterValuesType): Array<TaskType> => {
             switch (filterValue) {
                 case "active":
-                    return allTasks.filter(t => t.isDone === false)
+                    return allTasks.filter(t => !t.isDone) //t.isDone === false
                 case "completed":
-                    return allTasks.filter(t => t.isDone === true)
+                    return allTasks.filter(t => t.isDone) ////t.isDone === true
                 default:
                     return allTasks
             }
@@ -46,7 +48,12 @@ export function Todolist(props: TodoListPropsType) {
 
     const filteredTasks: Array<TaskType> = getFilteredTasks(tasks, filter);
     const addTaskHandler = () => {
-        addTask(taskTitle);
+        const trimmedTaskTitle = taskTitle.trim()
+        if (trimmedTaskTitle !== ""){
+            addTask(taskTitle);
+        } else {
+            setError("Title is required")
+        }
         setTaskTitle("");
     }
 
@@ -89,15 +96,20 @@ const tasklist: JSX.Element = filteredTasks.length === 0
         <div className="todolist">
             <h3>{title}</h3>
             <div>
-                <input value={taskTitle}
+                <input className={error ? "task-input-error" : ""}
+                    value={taskTitle}
                        onChange={changeTaskTitleHandler}
                        onKeyUp={addTaskOnKeyUpHandler}/>
                 <Button title="+"
                         onClickHandler={addTaskHandler}
                         disabled={isAddBtnDisabled}
                 />
-                {taskTitle.length > 10 && <div>Use not more than 10 charters</div>}
-                {taskTitle.length > 15 && <div>You used more than 15 charters</div>}
+                {taskTitle.length > 10 && taskTitle.length <= 15 ? (
+                    <div>Use not more than 10 characters</div>
+                ) : taskTitle.length > 15 ? (
+                    <div>You used more than 15 characters</div>
+                ) : null}
+                {error && <div>{error}</div>}
             </div>
             {tasklist}
             <div>
