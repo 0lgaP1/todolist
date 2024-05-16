@@ -9,7 +9,7 @@ export type TodoListPropsType = {
     date?: string
     addTask: (title: string) => void
     removeTask: (taskId: string) => void
-    changeTaskStatus: (taskId: string) => void
+    changeTaskStatus: (taskId: string, newIsDoneValue: boolean) => void
     //changeFilter: (filter: FilterValuesType) => void
 }
 export function Todolist(props: TodoListPropsType) {
@@ -66,12 +66,14 @@ const tasklist: JSX.Element = filteredTasks.length === 0
         {
             filteredTasks.map(task => {
                 const removeTaskHandler = () => removeTask(task.id)
+                const changeTaskStatusHandler =
+                    (e: ChangeEvent<HTMLInputElement>) => changeTaskStatus(task.id, e.currentTarget.checked)
                 return (
                     <li key={task.id}>
                         <input
                             type="checkbox"
                             checked={task.isDone}
-                            onChange={() => changeTaskStatus(task.id)}
+                            onChange={changeTaskStatusHandler}
                         />
                         <span>{task.title}</span>
                         <Button
