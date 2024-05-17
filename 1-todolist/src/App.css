@@ -8,7 +8,7 @@
 }
 
 .todolist {
-    background-color: #ffaa31;
+    background: linear-gradient(to right, rgba(255, 181, 66, 0.65), rgba(164, 183, 127, 0.61));
     padding: 20px;
     display: inline-block;
     border-radius: 10px;
@@ -38,11 +38,12 @@ li:not(:last-child) {
 }
 
 .btn-filter-active {
-    background-color: rgb(156, 178, 29);
+    background-color: #436cef;
+    color: white;
 }
 
 button {
-    background-color: rgba(255, 255, 255, 0.37);
+    background-color: rgba(255, 255, 255, 0.9);
     color: #000000;
     cursor: pointer;
     border-radius: 5px;
@@ -51,7 +52,11 @@ button {
     box-shadow: none;
 
     &:hover {
-        background-color: #436cef;
+        background-color: rgba(161, 180, 51, 0.93);
+    }
+
+    &:disabled {
+         background-color: #ccc;
     }
 }
 

@@ -25,7 +25,7 @@ export function Todolist(props: TodoListPropsType) {
 
     // UI LOGIC
     const [filter, setFilter] = useState<FilterValuesType>("all")
-    const [taskTitle, setTaskTitle] = useState("")
+    const [taskTitle, setTaskTitle] = useState("") //отслеживаем ввод пользователя
     const [error, setError] = useState<string | null>(null)
 
     console.log(taskTitle)
