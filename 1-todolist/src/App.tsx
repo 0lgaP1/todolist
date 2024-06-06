@@ -13,6 +13,7 @@ export type TaskType = {
     title: string
     isDone: boolean
 }
+
 function App() {
 //Data
 // BLL
@@ -55,14 +56,14 @@ function App() {
     }
 
 // UI:
-      return (
+    return (
         <div className="App">
             <Todolist title={todoListTitle}
                       tasks={tasks}
                       addTask={addTask}
                       removeTask={removeTask}
                       changeTaskStatus={changeTaskStatus}
-                      //changeFilter={changeFilter}
+                //changeFilter={changeFilter}
             />
         </div>
     );
