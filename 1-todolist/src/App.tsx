@@ -13,10 +13,16 @@ export type TaskType = {
     title: string
     isDone: boolean
 }
+export type TodolistType = {
+    id: string
+    title: string
+    filter: FilterValuesType
+}
 
 function App() {
 //Data
 // BLL
+
     const todoListTitle: string = "What to read"
     const [tasks, setTasks] = useState([
         {id: v1(), title: "HTML", isDone: true},
@@ -26,6 +32,13 @@ function App() {
         {id: v1(), title: 'Typescript', isDone: false},
         {id: v1(), title: 'RTK query', isDone: false},
     ])
+
+    let [todoLists, setTodoLists] = useState<TodolistType[]>([
+        {id: v1(), title: "What to read", filter: "all"},
+        {id: v1(), title: "What to learn", filter: "all"},
+    ])
+
+
 // change logic:
 // create form CRUD operations - addTask
     const addTask = (title: string) => {
@@ -56,17 +69,22 @@ function App() {
     }
 
 // UI:
-    return (
-        <div className="App">
-            <Todolist title={todoListTitle}
-                      tasks={tasks}
-                      addTask={addTask}
-                      removeTask={removeTask}
-                      changeTaskStatus={changeTaskStatus}
-                //changeFilter={changeFilter}
-            />
-        </div>
-    );
-}
 
-export default App;
+    <div className="App">
+        {todoLists.map(t1 => {
+            return (
+                <Todolist
+                    key={t1.id}
+                    title={t1.title}
+                    tasks={tasks}
+                    addTask={addTask}
+                    removeTask={removeTask}
+                    changeTaskStatus={changeTaskStatus}
+                    //changeFilter={changeFilter}
+                    filter={t1.}
+                />
+            )
+        })}
+    </div>
+}
+            export default App;

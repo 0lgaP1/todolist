@@ -2,7 +2,6 @@ import React, {useState, KeyboardEvent, ChangeEvent} from 'react';
 import {Button} from "./Button";
 import {FilterValuesType, TaskType} from "./App";
 
-
 export type TodoListPropsType = {
     title: string
     tasks: TaskType[]
@@ -28,7 +27,6 @@ export function Todolist(props: TodoListPropsType) {
     const [filter, setFilter] = useState<FilterValuesType>("all")
     const [taskTitle, setTaskTitle] = useState("") //отслеживаем ввод пользователя
     const [error, setError] = useState<string | null>(null)
-
     console.log(taskTitle)
 
     const changeFilter = (filter: FilterValuesType) => {
