@@ -4,12 +4,13 @@ import {FilterValuesType, TaskType} from "./App";
 
 export type TodoListPropsType = {
     title: string
+    id: string
     tasks: TaskType[]
     date?: string
     addTask: (title: string) => void
     removeTask: (taskId: string) => void
     changeTaskStatus: (taskId: string, newIsDoneValue: boolean) => void
-    //changeFilter: (filter: FilterValuesType) => void
+    changeFilter: (filter: FilterValuesType, todolistId: string) => void
 }
 
 export function Todolist(props: TodoListPropsType) {
@@ -20,7 +21,7 @@ export function Todolist(props: TodoListPropsType) {
         addTask,
         removeTask,
         changeTaskStatus,
-        //changeFilter
+        // changeFilter
     } = props;
 
     // UI LOGIC
@@ -29,20 +30,16 @@ export function Todolist(props: TodoListPropsType) {
     const [error, setError] = useState<string | null>(null)
     console.log(taskTitle)
 
-    const changeFilter = (filter: FilterValuesType) => {
-        setFilter(filter)
-    }
-
     const getFilteredTasks = (allTasks: Array<TaskType>, filterValue: FilterValuesType): Array<TaskType> => {
-            switch (filterValue) {
-                case "active":
-                    return allTasks.filter(t => !t.isDone) //t.isDone === false
-                case "completed":
-                    return allTasks.filter(t => t.isDone) ////t.isDone === true
-                default:
-                    return allTasks
-            }
+        switch (filterValue) {
+            case "active":
+                return allTasks.filter(t => !t.isDone) //t.isDone === false
+            case "completed":
+                return allTasks.filter(t => t.isDone) ////t.isDone === true
+            default:
+                return allTasks
         }
+    }
 
     const filteredTasks: Array<TaskType> = getFilteredTasks(tasks, filter);
     const addTaskHandler = () => {
