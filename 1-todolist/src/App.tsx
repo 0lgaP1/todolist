@@ -24,35 +24,33 @@ function App() {
 // BLL
 
     // const todoListTitle: string = "What to read"
-    const [tasks, setTasks] = useState([
+    const [tasks, setTasks] = useState<Array<TaskType>>([
         {id: v1(), title: "HTML", isDone: true},
         {id: v1(), title: "JS/TS", isDone: true},
         {id: v1(), title: "React", isDone: false},
         {id: v1(), title: "Redux", isDone: false},
         {id: v1(), title: 'Typescript', isDone: false},
         {id: v1(), title: 'RTK query', isDone: false},
-    ])
+    ]);
 
     let [todoLists, setTodoLists] = useState<Array<TodoListType>>([
         {id: v1(), title: "What to read", filter: "all"},
         {id: v1(), title: "What to learn", filter: "completed"},
-    ])
+    ]);
 // change logic:
 // create form CRUD operations - addTask
     const addTask = (title: string) => {
-        setTasks([{id: v1(), title, isDone: false}, ...tasks])
-    }
+        setTasks([{id: v1(), title, isDone: false}, ...tasks]);
+    };
 // U update from CRUD - changeTaskStatus
     const changeTaskStatus = (taskId: string, newIsDoneValue: boolean) => {
-
         // const taskForUpdate: TaskType | undefined = tasks.find(t => t.id === taskId)
         //if(taskForUpdate){
         //        taskForUpdate.isDone = !taskForUpdate.isDone
         //        }
         //setTasks([...tasks]) - метод find работает имутабельно, но, в отл от filter, не создает новый массив, содержащий 1 таску, а только новый объект с 1 таской -> лучше для оптимизации
-        const nextState: Array<TaskType> = tasks.map(t => t.id === taskId ? {...t, isDone: newIsDoneValue} : t)
-        setTasks(nextState)
-    }
+        setTasks(tasks.map(t => t.id === taskId ? {...t, isDone: newIsDoneValue} : t));
+    };
 // D delete from CRUD - removeTask
     const removeTask = (taskId: string) => {
         const nextState: any = []
@@ -60,21 +58,20 @@ function App() {
             if (tasks[i].id != taskId) {
                 nextState.push(tasks[i])
             }
-        }
+        } // GPT предлагает заменить на
         console.log(nextState)
         setTasks(nextState)
     }
     const changeFilter = (value: FilterValuesType, todolistId: string) => {
-
         const newTodolists = todoLists.map(tl => {
-            return tl.id === todolistId ? {...tl, filter:value} : tl
-        })
-        setTodoLists(newTodolists)
-    }
+            return tl.id === todolistId ? {...tl, filter: value} : tl;
+        });
+        setTodoLists(newTodolists);
+    };
 // UI:
-
-    <div className="App">
-        {todoLists.map(tl => {
+    return (
+        <div className="App">
+            {todoLists.map((tl) => {
                 let tasksForTodolist = tasks
 
                 if (tl.filter === 'active') {
@@ -84,23 +81,20 @@ function App() {
                     tasksForTodolist = tasks.filter(task => task.isDone)
                 }
 
-                return (
-                    <Todolist
-                        key={tl.id}
-                        todolistId={tl.id}
-                        title={tl.title}
-                        tasks={tasks}
-                        addTask={addTask}
-                        removeTask={removeTask}
-                        changeTaskStatus={changeTaskStatus}
-                        changeFilter={changeFilter}
-                        filter={tl.filter}
-                    />
-                )
-            }
-        )
-        }
-    </div>
+                return <Todolist
+                    key={tl.id}
+                    todolistId={tl.id}
+                    title={tl.title}
+                    tasks={tasksForTodolist}
+                    addTask={addTask}
+                    removeTask={removeTask}
+                    changeTaskStatus={changeTaskStatus}
+                    changeFilter={changeFilter}
+                    filter={tl.filter}
+                />
+            })}
+        </div>
+    );
 }
 
 export default App;
