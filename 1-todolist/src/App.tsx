@@ -53,7 +53,6 @@ function App() {
         const nextState: Array<TaskType> = tasks.map(t => t.id === taskId ? {...t, isDone: newIsDoneValue} : t)
         setTasks(nextState)
     }
-
 // D delete from CRUD - removeTask
     const removeTask = (taskId: string) => {
         const nextState: any = []
@@ -66,13 +65,9 @@ function App() {
         setTasks(nextState)
     }
     const changeFilter = (value: FilterValuesType, todolistId: string) => {
-        let todolist = todoLists.find(tl => tl.id === todolistId);
-        if (todolist) {
-            todolist.filter = value;
-            setTodoLists([...todoLists])
-        }
+
         const newTodolists = todoLists.map(tl => {
-            return tl.id === todolistId ? {...tl, filter} : tl
+            return tl.id === todolistId ? {...tl, filter:value} : tl
         })
         setTodoLists(newTodolists)
     }
@@ -92,7 +87,7 @@ function App() {
                 return (
                     <Todolist
                         key={tl.id}
-                        id={tl.id}
+                        todolistId={tl.id}
                         title={tl.title}
                         tasks={tasks}
                         addTask={addTask}
