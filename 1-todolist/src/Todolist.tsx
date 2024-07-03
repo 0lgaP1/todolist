@@ -11,6 +11,7 @@ export type TodoListPropsType = {
     removeTask: (taskId: string, todolistId: string) => void
     changeTaskStatus: (taskId: string, newIsDoneValue: boolean, todolistId: string) => void
     changeFilter: (filter: FilterValuesType, todolistId: string) => void
+    removeTodolist: (todolistId: string) => void
 }
 
 export function Todolist(props: TodoListPropsType) {
@@ -90,9 +91,10 @@ export function Todolist(props: TodoListPropsType) {
             }
         </ul>;
 
+  const removeTodolist = () => {props.removeTodolist(props.todolistId)}
     return (
         <div className="todolist">
-            <h3>{title}</h3>
+            <h3>{title} <button onClick={removeTodolist}>x</button></h3>
             <div>
                 <input className={error ? "task-input-error" : ""}
                        value={taskTitle}
