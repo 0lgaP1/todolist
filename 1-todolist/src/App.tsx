@@ -82,12 +82,8 @@ function App() {
             [todolistId]: tasks[todolistId].filter(t => t.id !== taskId)
         });
     }
-    const changeFilter = (value: FilterValuesType, todolistId: string) => {
-        let todolist = todoLists.find(tl => tl.id === todolistId);
-        if (todolist) {
-        todolist.filter = value;
-        setTodoLists([...todoLists]);
-        }
+    const changeFilter = (filter: FilterValuesType, todolistId: string) => {
+        setTodoLists(todoLists.map(tl => (tl.id === todolistId ? {...tl, filter} : tl)))
     }
 // UI:
     return (
