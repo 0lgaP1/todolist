@@ -34,9 +34,9 @@ export function Todolist(props: TodoListPropsType) {
     const getFilteredTasks = (allTasks: Array<TaskType>, filterValue: FilterValuesType): Array<TaskType> => {
         switch (filterValue) {
             case "active":
-                return allTasks.filter(t => !t.isDone) //t.isDone === false
+                return allTasks.filter(t => !t.isDone)
             case "completed":
-                return allTasks.filter(t => t.isDone) ////t.isDone === true
+                return allTasks.filter(t => t.isDone)
             default:
                 return allTasks
         }

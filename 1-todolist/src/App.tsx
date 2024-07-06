@@ -36,14 +36,14 @@ function App() {
             {id: v1(), title: 'RTK query', isDone: false},
         ],
         [todolist2]: [
-            {id: v1(), title: 'Typescript', isDone: false},
-            {id: v1(), title: 'RTK query', isDone: false},
+            {id: v1(), title: 'Typescript', isDone: true},
+            {id: v1(), title: 'RTK query', isDone: true},
     ]
 });
 
     let [todoLists, setTodoLists] = useState<Array<TodoListType>>([
         {id: todolist1, title: "What to read", filter: "all"},
-        {id: todolist2, title: "What to learn", filter: "completed"},
+        {id: todolist2, title: "What to learn", filter: "all"},
     ]);
 
     let removeTodolist = (todolistId: string) => {
@@ -55,16 +55,21 @@ function App() {
 // change logic:
 // create form CRUD operations - addTask
     const addTask = (title: string, todolistId: string) => {
+        const newTask = {
+            id: v1(),
+            title: title,
+            isDone: false,
+        }
         setTasks({
             ...tasks,
-            [todolistId]: [{ id: v1(), title, isDone: false}, ...tasks[todolistId]]
+            [todolistId]: [newTask, ...tasks[todolistId]]
         });
     };
 // U update from CRUD - changeTaskStatus
     const changeTaskStatus = (taskId: string, newIsDoneValue: boolean, todolistId: string) => {
         setTasks({
             ...tasks,
-            [todolistId]: tasks[todolistId].map(t => t.id === taskId ? {...t, isDone: newIsDoneValue} : t)
+            [todolistId]: tasks[todolistId].map(t => t.id == taskId ? {...t, isDone: newIsDoneValue} : t)
         });
     };
 // D delete from CRUD - removeTask
