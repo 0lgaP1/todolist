@@ -53,17 +53,15 @@ export function Todolist(props: TodoListPropsType) {
         }
         setTaskTitle("");
     }
-
     const addTaskOnKeyUpHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter" && taskTitle) {
             addTaskHandler()
         }
     }
-
     const changeTaskTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTaskTitle(e.currentTarget.value);
     };
-
+    const removeTodolist = () => {props.removeTodolist(props.todolistId)};
     const isAddBtnDisabled = taskTitle.length === 0 || taskTitle.length > 15
 
     const tasklist: JSX.Element = filteredTasks.length === 0
@@ -72,29 +70,27 @@ export function Todolist(props: TodoListPropsType) {
             {
                 filteredTasks.map(task => {
                     const removeTaskHandler = () => removeTask(task.id, todolistId);
-                       const changeTaskStatusHandler =
-                       (e: ChangeEvent<HTMLInputElement>) => changeTaskStatus(task.id, e.currentTarget.checked, todolistId)
+                    const changeTaskStatusHandler =
+                        (e: ChangeEvent<HTMLInputElement>) => changeTaskStatus(task.id, e.currentTarget.checked, todolistId)
                     return (
                         <li key={task.id}>
                             <input
                                 type="checkbox"
                                 checked={task.isDone}
-                                onChange={changeTaskStatusHandler}
-                            />
+                                onChange={changeTaskStatusHandler}/>
                             <span className={task.isDone ? "task-done" : "task"}>{task.title}</span>
                             <Button
                                 title="x"
                                 onClickHandler={removeTaskHandler}/>
                         </li>
-                    )
-                })
-            }
+                    )})}
         </ul>;
 
-  const removeTodolist = () => {props.removeTodolist(props.todolistId)}
     return (
         <div className="todolist">
-            <h3>{title} <button onClick={removeTodolist}>x</button></h3>
+            <h3>{title}
+                <button onClick={removeTodolist}>x</button>
+            </h3>
             <div>
                 <input className={error ? "task-input-error" : ""}
                        value={taskTitle}
@@ -102,8 +98,8 @@ export function Todolist(props: TodoListPropsType) {
                        onKeyUp={addTaskOnKeyUpHandler}/>
                 <Button title="+"
                         onClickHandler={addTaskHandler}
-                        disabled={isAddBtnDisabled}
-                />
+                        disabled={isAddBtnDisabled}/>
+
                 {taskTitle.length > 10 && taskTitle.length <= 15 ? (
                     <div>Use not more than 10 characters</div>
                 ) : taskTitle.length > 15 ? (
