@@ -41,7 +41,6 @@ export function Todolist(props: TodoListPropsType) {
                 return allTasks
         }
     }
-
     const filteredTasks: Array<TaskType> = getFilteredTasks(tasks, props.filter);
     const addTaskHandler = () => {
         const trimmedTaskTitle = taskTitle.trim()
@@ -111,15 +110,15 @@ export function Todolist(props: TodoListPropsType) {
             <div>
                 <Button
                     title={'All'}
-                    onClickHandler={() => props.changeFilter(props.filter, todolistId)}
+                    onClickHandler={() => changeFilter('all', todolistId)}
                     classes={props.filter === "all" ? "btn-filter-active" : ""}/>
                 <Button
                     title={'Active'}
-                    onClickHandler={() => props.changeFilter(props.filter, todolistId)}
+                    onClickHandler={() => changeFilter('active', todolistId)}
                     classes={props.filter === "active" ? "btn-filter-active" : ""}/>
                 <Button
                     title={'Completed'}
-                    onClickHandler={() => props.changeFilter(props.filter, todolistId)}
+                    onClickHandler={() => changeFilter('completed', todolistId)}
                     classes={props.filter === "completed" ? "btn-filter-active" : ""}/>
             </div>
         </div>

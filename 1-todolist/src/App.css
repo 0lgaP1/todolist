@@ -33,6 +33,11 @@ li:not(:last-child) {
     opacity: 0.5;
 }
 
+.todolist-title-container {
+    display: flex;
+    align-items: center;
+}
+
 .task-input-error {
     border: 2px solid red;
 }
