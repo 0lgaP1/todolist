@@ -19,6 +19,10 @@ export type TodoListType = {
     filter: FilterValuesType
 }
 
+export type TasksStateType = {
+    [key: string]: TaskType[]
+}
+
 function App() {
 //Data
 // BLL
@@ -26,7 +30,7 @@ function App() {
     let todolist1 = v1();
     let todolist2 = v1();
 
-    const [tasks, setTasks] = useState({
+    const [tasks, setTasks] = useState<TasksStateType>({
         [todolist1]: [
             {id: v1(), title: "HTML", isDone: true},
             {id: v1(), title: "JS/TS", isDone: true},
@@ -38,8 +42,8 @@ function App() {
         [todolist2]: [
             {id: v1(), title: 'Typescript', isDone: true},
             {id: v1(), title: 'RTK query', isDone: true},
-    ]
-});
+        ]
+    });
 
     let [todoLists, setTodoLists] = useState<Array<TodoListType>>([
         {id: todolist1, title: "What to read", filter: "all"},
@@ -93,6 +97,8 @@ function App() {
 // UI:
     return (
         <div className="App">
+            <input/> <button>+</button>
+
             {todoLists.map(tl => {
                 const allTodolistTasks = tasks[tl.id]
                 let tasksForTodolist = allTodolistTasks
