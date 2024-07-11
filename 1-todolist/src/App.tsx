@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from "./Todolist";
 import {v1} from "uuid";
+import {AddItemForm} from "./AddItemForm";
 //crud:
 //c - create
 //r - read (view mode, filter, sort, search, pagination)
@@ -95,9 +96,21 @@ function App() {
         setTodoLists(todoLists.map(tl => (tl.id === todolistId ? {...tl, filter} : tl)))
     }
 // UI:
+    function addTodolist(title: string){
+        let todolist: TodoListType = {
+            id: v1(),
+            filter: 'all',
+            title: title,
+        };
+        setTodoLists([todolist, ...todoLists]);
+        setTasks({
+            ...tasks,
+        [todolist.id]: []
+        })
+    }
     return (
         <div className="App">
-            <input/> <button>+</button>
+            <AddItemForm addItem={addTodolist} />
 
             {todoLists.map(tl => {
                 const allTodolistTasks = tasks[tl.id]

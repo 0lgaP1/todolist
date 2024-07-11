@@ -2,8 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {Button} from "./Button";
 
 export type AddTodoListPropsType = {
-    addTask: (title: string, todolistId: string) => void;
-    id: string;
+    addItem: (title: string) => void;
 }
 
 export function AddItemForm(props: AddTodoListPropsType) {
@@ -21,7 +20,7 @@ export function AddItemForm(props: AddTodoListPropsType) {
     const addTaskHandler = () => {
         const trimmedTaskTitle = taskTitle.trim()
         if (trimmedTaskTitle !== "") {
-            props.addTask(props.id, taskTitle);
+            props.addItem(taskTitle);
             setError(null);
         } else {
             setError("Title is required")
