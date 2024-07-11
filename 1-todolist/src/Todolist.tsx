@@ -2,6 +2,7 @@ import React, {ChangeEvent} from 'react';
 import {Button} from "./Button";
 import {FilterValuesType, TaskType} from "./App";
 import {AddItemForm} from "./AddItemForm";
+import {EditableSpan} from "./EditableSpan";
 
 export type TodoListPropsType = {
     title: string
@@ -11,6 +12,7 @@ export type TodoListPropsType = {
     addTask: (title: string, todolistId: string) => void
     removeTask: (taskId: string, todolistId: string) => void
     changeTaskStatus: (taskId: string, newIsDoneValue: boolean, todolistId: string) => void
+    changeTaskTitle: (taskId: string, newValue: string, todolistId: string) => void
     changeFilter: (filter: FilterValuesType, todolistId: string) => void
     removeTodolist: (todolistId: string) => void
 }
@@ -22,6 +24,7 @@ export function Todolist(props: TodoListPropsType) {
         todolistId,
         removeTask,
         changeTaskStatus,
+        changeTaskTitle,
         changeFilter
     } = props;
 
@@ -55,13 +58,17 @@ export function Todolist(props: TodoListPropsType) {
                     const removeTaskHandler = () => removeTask(task.id, todolistId);
                     const changeTaskStatusHandler =
                         (e: ChangeEvent<HTMLInputElement>) => changeTaskStatus(task.id, e.currentTarget.checked, todolistId)
+                    const changeTaskTitleHandler =
+                        (newValue: string) => changeTaskTitle(task.id, newValue, todolistId)
+
                     return (
                         <li key={task.id}>
                             <input
                                 type="checkbox"
                                 checked={task.isDone}
                                 onChange={changeTaskStatusHandler}/>
-                            <span className={task.isDone ? "task-done" : "task"}>{task.title}</span>
+                            {/*<span className={task.isDone ? "task-done" : "task"}>{task.title}</span>*/}
+                            <EditableSpan title={task.title} onChange={changeTaskTitleHandler} isDone={task.isDone}/>
                             <Button
                                 title="x"
                                 onClickHandler={removeTaskHandler}/>
@@ -72,7 +79,6 @@ export function Todolist(props: TodoListPropsType) {
 
     return (
         <div className="todolist">
-
             <div className={"todolist-title-container"}>
                 <h3>{title}
                     <button onClick={removeTodolist}>x</button>
