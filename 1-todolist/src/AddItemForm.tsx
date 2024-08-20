@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
-import {Button} from "@mui/material";
+import {Button} from "./Button";
 
 
 export type AddTodoListPropsType = {
@@ -35,12 +35,10 @@ export function AddItemForm(props: AddTodoListPropsType) {
                onChange={changeTaskTitleHandler}
                onKeyUp={addTaskOnKeyUpHandler}/>
         <Button
-                    variant="contained"
-                    color="primary"
-                    onClickHandler={addTaskHandler}
-                    disabled={isAddBtnDisabled}>
-        +
-    </Button>
+                    title={"+"}
+                    onClick={addTaskHandler}
+                    disabled={isAddBtnDisabled}
+        />
         {taskTitle.length > 10 && taskTitle.length <= 15 ? (
             <div>Use not more than 10 characters</div>
         ) : taskTitle.length > 15 ? (

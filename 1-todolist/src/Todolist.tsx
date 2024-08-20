@@ -1,8 +1,11 @@
 import React, {ChangeEvent} from 'react';
 import {Button} from "./Button";
+import {Box} from "@mui/material";
 import {FilterValuesType, TaskType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete"
 
 export type TodoListPropsType = {
     title: string
@@ -69,9 +72,9 @@ export function Todolist(props: TodoListPropsType) {
                                 onChange={changeTaskStatusHandler}/>
                             {/*<span className={task.isDone ? "task-done" : "task"}>{task.title}</span>*/}
                             <EditableSpan title={task.title} onChange={changeTaskTitleHandler} isDone={task.isDone}/>
-                            <Button
-                                title="x"
-                                onClickHandler={removeTaskHandler}/>
+                            <IconButton onClick={removeTaskHandler} >
+                                <DeleteIcon />
+                            </IconButton>
                         </li>
                     )
                 })}
@@ -81,25 +84,27 @@ export function Todolist(props: TodoListPropsType) {
         <div className="todolist">
             <div className={"todolist-title-container"}>
                 <h3>{title}
-                    <button onClick={removeTodolist}>x</button>
+                    <IconButton onClick={removeTodolist}>
+                        <DeleteIcon />
+                    </IconButton>
                 </h3>
             </div>
             <AddItemForm addItem={addTask}/>
             {taskList}
-            <div>
+            <Box display={"flex"} gap={2}>
                 <Button
                     title={'All'}
-                    onClickHandler={onAllClickHandler}
+                    onClick={onAllClickHandler}
                     classes={props.filter === "all" ? "btn-filter-active" : ""}/>
                 <Button
                     title={'Active'}
-                    onClickHandler={onActiveClickHandler}
+                    onClick={onActiveClickHandler}
                     classes={props.filter === "active" ? "btn-filter-active" : ""}/>
                 <Button
                     title={'Completed'}
-                    onClickHandler={onCompletedClickHandler}
+                    onClick={onCompletedClickHandler}
                     classes={props.filter === "completed" ? "btn-filter-active" : ""}/>
-            </div>
+            </Box>
         </div>
     )
 }

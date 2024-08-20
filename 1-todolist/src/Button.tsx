@@ -1,34 +1,22 @@
 import React from 'react';
-import styled from "styled-components"
+import { Button as MuiButton } from "@mui/material";
 
-// const StyledBtn = styled.button`
-    //background-color: #a1b433;
-    //color: #000000;
-    //cursor: pointer;
-    //border-radius: 5px;
-    //gap: 8px;
-    //border: 1px solid rgb(0, 0, 0);
-    //box-shadow: none;
-    //
-    //&:hover {
-    //    background-color: #436cef;
-    //}
-    //
-    //&:disabled {
-    //    background-color: #ccc;
-    //}
-// `
 type ButtonPropsType = {
     title: string
-    onClickHandler?: () => void
+    onClick?: () => void
     disabled?: boolean
     classes?: string
 }
-export const Button = ({title, onClickHandler, disabled, classes}: ButtonPropsType) => {
+export const Button = ({title, onClick, disabled, classes}: ButtonPropsType) => {
     return (
-            <button
-                onClick={onClickHandler}
+            <MuiButton
+                onClick={onClick}
                 disabled={disabled}
-                className={classes}>{title}</button>
-    );
+                className={classes}
+                variant="contained"
+                color="primary"
+
+                >
+                {title}
+            </MuiButton>    );
 };
