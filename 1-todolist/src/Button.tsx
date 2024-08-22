@@ -5,17 +5,16 @@ type ButtonPropsType = {
     title: string
     onClick?: () => void
     disabled?: boolean
-    classes?: string
+    variant?: 'text' // was classes: string
+    color?: 'inherit' | 'primary' | 'secondary'
 }
-export const Button = ({title, onClick, disabled, classes}: ButtonPropsType) => {
+export const Button = ({title, onClick, disabled, variant='text', color='primary'}: ButtonPropsType) => {
     return (
             <MuiButton
                 onClick={onClick}
                 disabled={disabled}
-                className={classes}
-                variant="contained"
-                color="primary"
-
+                variant={variant}
+                color={color}
                 >
                 {title}
             </MuiButton>    );

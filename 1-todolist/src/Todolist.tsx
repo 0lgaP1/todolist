@@ -95,15 +95,19 @@ export function Todolist(props: TodoListPropsType) {
                 <Button
                     title={'All'}
                     onClick={onAllClickHandler}
-                    classes={props.filter === "all" ? "btn-filter-active" : ""}/>
+                    variant="text"
+                    color={props.filter === "all" ? "primary" : "inherit"}
+                    />
                 <Button
                     title={'Active'}
                     onClick={onActiveClickHandler}
-                    classes={props.filter === "active" ? "btn-filter-active" : ""}/>
+                    variant="text"
+                    color={props.filter === "active" ? "secondary" : "inherit"}/>
                 <Button
                     title={'Completed'}
                     onClick={onCompletedClickHandler}
-                    classes={props.filter === "completed" ? "btn-filter-active" : ""}/>
+                    variant="text"
+                    color={props.filter === "completed" ? "primary" : "inherit"}/>
             </Box>
         </div>
     )

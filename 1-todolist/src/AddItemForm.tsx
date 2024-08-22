@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {Button} from "./Button";
+import {TextField} from "@mui/material";
 
 
 export type AddTodoListPropsType = {
@@ -30,7 +31,11 @@ export function AddItemForm(props: AddTodoListPropsType) {
     }
 
     return <div>
-        <input className={error ? "task-input-error" : ""}
+        <TextField
+            label="Enter a title"
+            variant={'outlined'}
+            size={'small'}
+            className={error ? 'task-input-error' : ''}
                value={taskTitle}
                onChange={changeTaskTitleHandler}
                onKeyUp={addTaskOnKeyUpHandler}/>
