@@ -34,11 +34,12 @@ export function AddItemForm(props: AddTodoListPropsType) {
         <TextField
             label="Enter a title"
             variant={'outlined'}
-            size={'small'}
-            className={error ? 'task-input-error' : ''}
-               value={taskTitle}
-               onChange={changeTaskTitleHandler}
-               onKeyUp={addTaskOnKeyUpHandler}/>
+            error={!!error}
+            helperText={error}
+            size={'small'} //className={error ? 'task-input-error' : ''}
+            value={taskTitle}
+            onChange={changeTaskTitleHandler}
+            onKeyUp={addTaskOnKeyUpHandler}/>
         <Button
                     title={"+"}
                     onClick={addTaskHandler}
