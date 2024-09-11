@@ -6,6 +6,7 @@ import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete"
+import {Checkbox} from "@mui/material";
 
 export type TodoListPropsType = {
     title: string
@@ -66,14 +67,14 @@ export function Todolist(props: TodoListPropsType) {
 
                     return (
                         <li key={task.id}>
-                            <input
-                                type="checkbox"
+                            <Checkbox
+                                color={"primary"}
                                 checked={task.isDone}
                                 onChange={changeTaskStatusHandler}/>
                             {/*<span className={task.isDone ? "task-done" : "task"}>{task.title}</span>*/}
                             <EditableSpan title={task.title} onChange={changeTaskTitleHandler} isDone={task.isDone}/>
-                            <IconButton onClick={removeTaskHandler} >
-                                <DeleteIcon />
+                            <IconButton onClick={removeTaskHandler}>
+                                <DeleteIcon/>
                             </IconButton>
                         </li>
                     )
@@ -85,7 +86,7 @@ export function Todolist(props: TodoListPropsType) {
             <div className={"todolist-title-container"}>
                 <h3>{title}
                     <IconButton onClick={removeTodolist}>
-                        <DeleteIcon />
+                        <DeleteIcon/>
                     </IconButton>
                 </h3>
             </div>
@@ -97,7 +98,7 @@ export function Todolist(props: TodoListPropsType) {
                     onClick={onAllClickHandler}
                     variant="text"
                     color={props.filter === "all" ? "primary" : "inherit"}
-                    />
+                />
                 <Button
                     title={'Active'}
                     onClick={onActiveClickHandler}

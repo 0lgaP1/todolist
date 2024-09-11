@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button as MuiButton } from "@mui/material";
+import {Button as MuiButton} from "@mui/material";
 
 type ButtonPropsType = {
     title: string
@@ -8,14 +8,15 @@ type ButtonPropsType = {
     variant?: 'text' // was classes: string
     color?: 'inherit' | 'primary' | 'secondary'
 }
-export const Button = ({title, onClick, disabled, variant='text', color='primary'}: ButtonPropsType) => {
+export const Button = ({title, onClick, disabled, variant = 'text', color = 'primary'}: ButtonPropsType) => {
     return (
-            <MuiButton
-                onClick={onClick}
-                disabled={disabled}
-                variant={variant}
-                color={color}
-                >
-                {title}
-            </MuiButton>    );
+        <MuiButton
+            onClick={onClick}
+            disabled={disabled}
+            variant={variant}
+            color={color}>
+
+            {title}
+
+        </MuiButton>);
 };
