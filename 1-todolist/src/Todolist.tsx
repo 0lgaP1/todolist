@@ -1,12 +1,13 @@
 import React, {ChangeEvent} from 'react';
 import {Button} from "./Button";
-import {Box} from "@mui/material";
+import {Box, List, ListItem} from "@mui/material";
 import {FilterValuesType, TaskType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete"
 import {Checkbox} from "@mui/material";
+import {filterButtonsContainerSx, getListItemSx} from "./Todolist.styles";
 
 export type TodoListPropsType = {
     title: string
@@ -56,7 +57,7 @@ export function Todolist(props: TodoListPropsType) {
 
     const taskList: JSX.Element = filteredTasks.length === 0
         ? <span>Your task list is empty</span>
-        : <ul>
+        : <List>
             {
                 filteredTasks.map(task => {
                     const removeTaskHandler = () => removeTask(task.id, todolistId);
@@ -66,20 +67,24 @@ export function Todolist(props: TodoListPropsType) {
                         (newValue: string) => changeTaskTitle(task.id, newValue, todolistId)
 
                     return (
-                        <li key={task.id}>
+                        <ListItem
+                            sx={getListItemSx(task.isDone)}
+                            key={task.id}>
+                            <div>
                             <Checkbox
                                 color={"primary"}
                                 checked={task.isDone}
                                 onChange={changeTaskStatusHandler}/>
                             {/*<span className={task.isDone ? "task-done" : "task"}>{task.title}</span>*/}
                             <EditableSpan title={task.title} onChange={changeTaskTitleHandler} isDone={task.isDone}/>
-                            <IconButton onClick={removeTaskHandler}>
+                            </div>
+                                <IconButton onClick={removeTaskHandler}>
                                 <DeleteIcon/>
                             </IconButton>
-                        </li>
+                        </ListItem>
                     )
                 })}
-        </ul>;
+        </List>;
 
     return (
         <div className="todolist">
@@ -92,7 +97,7 @@ export function Todolist(props: TodoListPropsType) {
             </div>
             <AddItemForm addItem={addTask}/>
             {taskList}
-            <Box display={"flex"} gap={2}>
+            <Box sx={filterButtonsContainerSx} gap={2}>
                 <Button
                     title={'All'}
                     onClick={onAllClickHandler}

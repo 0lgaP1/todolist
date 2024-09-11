@@ -1,8 +1,8 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {Button} from "./Button";
-import {TextField} from "@mui/material";
+import {Box, TextField} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-
+import AddBoxIcon from '@mui/icons-material/AddBox'
 
 export type AddTodoListPropsType = {
     addItem: (title: string) => void;
@@ -32,25 +32,30 @@ export function AddItemForm(props: AddTodoListPropsType) {
     }
 
     return <div>
-        <TextField
-            label="Enter a title"
-            variant={'outlined'}
-            error={!!error}
-            helperText={error}
-            size={'small'} //className={error ? 'task-input-error' : ''}
-            value={taskTitle}
-            onChange={changeTaskTitleHandler}
-            onKeyUp={addTaskOnKeyUpHandler}/>
-        <Button
-                    title={"+"}
-                    onClick={addTaskHandler}
-                    disabled={isAddBtnDisabled}
-        />
-        {taskTitle.length > 10 && taskTitle.length <= 15 ? (
-            <div>Use not more than 10 characters</div>
-        ) : taskTitle.length > 15 ? (
-            <div>You used more than 15 characters</div>
-        ) : null}
-        {error && <div>{error}</div>}
+        <Box display="flex" alignItems="center">
+            <TextField
+                label="Enter a title"
+                variant={'outlined'}
+                fullWidth //заставляет внутри бокса занять все свободное пространство
+                error={!!error}
+                helperText={error}
+                size={'small'} //className={error ? 'task-input-error' : ''}
+                value={taskTitle}
+                onChange={changeTaskTitleHandler}
+                onKeyUp={addTaskOnKeyUpHandler}/>
+            <IconButton
+                onClick={addTaskHandler}
+                disabled={isAddBtnDisabled}
+                style={{marginLeft: '10px'}}
+            >
+                <AddBoxIcon/>
+            </IconButton>
+            {taskTitle.length > 10 && taskTitle.length <= 15 ? (
+                <div>Use not more than 10 characters</div>
+            ) : taskTitle.length > 15 ? (
+                <div>You used more than 15 characters</div>
+            ) : null}
+            {error && <div>{error}</div>}
+        </Box>
     </div>
 }
