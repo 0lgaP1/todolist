@@ -6,6 +6,8 @@ import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, Paper, Toolbar} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from '@mui/icons-material/Menu'
+import {filterButtonsContainerSx} from "./Todolist.styles";
+import {MenuButton} from "./MenuButton";
 //crud:
 //c - create
 //r - read (view mode, filter, sort, search, pagination)
@@ -127,11 +129,15 @@ function App() {
     return (
         <div>
             <AppBar position="static" sx={{ mb: '30px' }}>
-                <Toolbar>
+                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <IconButton color="inherit">
                         <MenuIcon/>
                     </IconButton>
-                    <Button color="inherit">Login</Button>
+                    <div>
+                    <MenuButton >Login</MenuButton>
+                    <MenuButton >FAQ</MenuButton>
+                    <MenuButton >Logout</MenuButton>
+                    </div>
                 </Toolbar>
             </AppBar>
             <Container fixed>
