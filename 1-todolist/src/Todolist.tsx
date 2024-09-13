@@ -113,7 +113,7 @@ export function Todolist(props: TodoListPropsType) {
                     title={'Completed'}
                     onClick={onCompletedClickHandler}
                     variant="text"
-                    color={props.filter === "completed" ? "primary" : "inherit"}/>
+                    color={props.filter === "completed" ? "secondary" : "inherit"}/>
             </Box>
         </div>
     )

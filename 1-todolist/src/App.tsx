@@ -3,7 +3,18 @@ import './App.css';
 import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
-import {AppBar, Button, Container, Grid, Paper, Toolbar} from "@mui/material";
+import {
+    AppBar,
+    Button,
+    Container,
+    createTheme,
+    CssBaseline,
+    Grid,
+    Paper,
+    Switch,
+    ThemeProvider,
+    Toolbar
+} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from '@mui/icons-material/Menu'
 import {filterButtonsContainerSx} from "./Todolist.styles";
@@ -126,22 +137,44 @@ function App() {
         })
     }
 
+    type ThemeMode = 'dark' | 'light'
+    const [themeMode, setThemeMode] = useState<ThemeMode>('light')
+    const theme = createTheme({
+        palette: {
+            mode: themeMode === 'light' ? 'light' : 'dark',
+            primary: {
+                main: '#087EA4',
+            },
+
+            secondary: {
+                main: 'rgba(32,56,238,0.55)'
+            }
+        }
+    })
+
+    const changeModeHandler = () => {
+        setThemeMode(themeMode == 'light' ? 'dark' : 'light')
+    }
+
     return (
+    <ThemeProvider theme={theme}>
+        <CssBaseline/>
         <div>
-            <AppBar position="static" sx={{ mb: '30px' }}>
-                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <AppBar position="static" sx={{mb: '30px'}}>
+                <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
                     <IconButton color="inherit">
                         <MenuIcon/>
                     </IconButton>
                     <div>
-                    <MenuButton >Login</MenuButton>
-                    <MenuButton >FAQ</MenuButton>
-                    <MenuButton background={'#456789'}>Logout</MenuButton>
+                        <MenuButton>Login</MenuButton>
+                        <MenuButton>FAQ</MenuButton>
+                        <MenuButton background={'#456789'}>Logout</MenuButton>
+                        <Switch color={'default'} onChange={changeModeHandler}/>
                     </div>
                 </Toolbar>
             </AppBar>
             <Container fixed>
-                <Grid container sx={{ mb: '30px' }}>
+                <Grid container sx={{mb: '30px'}}>
                     <AddItemForm addItem={addTodolist}/>
                 </Grid>
                 <Grid container spacing={5}>
@@ -156,7 +189,7 @@ function App() {
                         }
 
                         return <Grid item>
-                            <Paper sx={{ p: '0 20px 20px 20px' }} >
+                            <Paper sx={{p: '0 20px 20px 20px'}}>
                                 <Todolist
                                     key={tl.id}
                                     todolistId={tl.id}
@@ -176,7 +209,9 @@ function App() {
                 </Grid>
             </Container>
         </div>
-    );
+    </ThemeProvider>
+)
+    ;
 }
 
 export default App;
