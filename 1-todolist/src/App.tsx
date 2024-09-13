@@ -136,7 +136,7 @@ function App() {
                     <div>
                     <MenuButton >Login</MenuButton>
                     <MenuButton >FAQ</MenuButton>
-                    <MenuButton >Logout</MenuButton>
+                    <MenuButton background={'#456789'}>Logout</MenuButton>
                     </div>
                 </Toolbar>
             </AppBar>
