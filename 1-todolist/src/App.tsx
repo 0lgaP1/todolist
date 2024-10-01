@@ -5,7 +5,6 @@ import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
 import {
     AppBar,
-    Button,
     Container,
     createTheme,
     CssBaseline,
@@ -17,7 +16,6 @@ import {
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from '@mui/icons-material/Menu'
-import {filterButtonsContainerSx} from "./Todolist.styles";
 import {MenuButton} from "./MenuButton";
 //crud:
 //c - create
@@ -103,7 +101,6 @@ function App() {
     const changeFilter = (filter: FilterValuesType, todolistId: string) => {
         setTodoLists(todoLists.map(tl => (tl.id === todolistId ? {...tl, filter} : tl)))
     };
-
 // U update from CRUD - changeTaskStatus, changeTaskTitle
     const changeTaskStatus = (taskId: string, newIsDoneValue: boolean, todolistId: string) => {
         let todolistTasks = tasks[todolistId];
@@ -151,7 +148,6 @@ function App() {
             }
         }
     })
-
     const changeModeHandler = () => {
         setThemeMode(themeMode == 'light' ? 'dark' : 'light')
     }
