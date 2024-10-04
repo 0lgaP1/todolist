@@ -49,6 +49,8 @@ export function AddItemForm(props: AddTodoListPropsType) {
             >
                 <AddBoxIcon/>
             </IconButton>
+        </Box>
+        <Box>
             {taskTitle.length > 10 && taskTitle.length <= 15 ? (
                 <div>Use not more than 10 characters</div>
             ) : taskTitle.length > 15 ? (

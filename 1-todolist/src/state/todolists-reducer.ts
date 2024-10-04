@@ -14,7 +14,7 @@ const initialState: TodoListType[] = [
     { id: todolistID2, title: 'What to buy', filter: 'all' },
 ]
 
-export const todolistsReducer = (state: Array<TodoListType> = initialState, action: ActionType): Array<TodoListType> => {
+export const todolistsReducer = (state: TodoListType[] = initialState, action: ActionType): TodoListType[] => {
     switch (action.type) {
         case 'REMOVE-TODOLIST': {
                 return state.filter(tl => tl.id !== action.payload.id)
@@ -22,7 +22,18 @@ export const todolistsReducer = (state: Array<TodoListType> = initialState, acti
         case 'ADD-TODOLIST': {
                 return [{ id: action.payload.id, title: action.payload.title, filter: 'all' }, ...state];
         }
+        case 'CHANGE-TODOLIST-TITLE': {
+            let task = state.find(t => t.id === action.id);
+            if (task) {
+                task.title = action.payload.title;
+            }
+            return [...state]
+
+        }
         default:
             throw new Error("I don't understand this action type")
     }
 }
+
+/*
+state[1].id === action.payload.id ? { ...state} : state))*/
