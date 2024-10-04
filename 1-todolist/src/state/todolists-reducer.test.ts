@@ -53,7 +53,7 @@ test('correct todolist should change its name', () => {
     let todolistId1 = v1()
     let todolistId2 = v1()
 
-    let newTodoListTitle = 'New test todolist title'
+    // let newTodoListTitle = 'New test todolist title'
 
     const startState: TodoListType[] = [
         { id: todolistId1, title: 'What to learn', filter: 'all' },
@@ -70,5 +70,5 @@ test('correct todolist should change its name', () => {
     const endState = todolistsReducer(startState, action)
 
     expect(endState[0].title).toBe('What to learn')
-    expect(endState[1].title).toBe(newTodoListTitle)
+    expect(endState[1].title).toBe('New Todolist')
 })
