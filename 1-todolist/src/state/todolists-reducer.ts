@@ -31,10 +31,11 @@ export const todolistsReducer = (state: TodoListType[] = initialState, action: A
 
             return state.map(tl=>tl.id === action.payload.id ? { ...tl , title: action.payload.title} : tl)
         }
+        case 'CHANGE-TODOLIST-FILTER': {
+            return state.map(tl=>tl.id === action.payload.id ? { ...tl, filter: action.payload.filter } : tl)
+        }
         default:
             throw new Error("I don't understand this action type")
     }
 }
 
-/*
-state[1].id === action.payload.id ? { ...state} : state))*/
