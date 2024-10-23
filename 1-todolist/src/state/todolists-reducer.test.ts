@@ -1,9 +1,6 @@
 import {
-    AddTodoListAC,
-    ChangeTodoListFilterAC,
-    ChangeTodoListTitleAC,
-    RemoveTodoListAC,
-    todolistsReducer
+    addTodoListAC, changeTodoListFilterAC, changeTodoListTitleAC,
+    removeTodoListAC, todolistsReducer
 } from './todolists-reducer'
 import {v1} from 'uuid'
 import {FilterValuesType, TodoListType} from '../App'
@@ -25,7 +22,7 @@ test('correct todolist should be removed', () => {
     //         id: todolistId1,
     //     },
     // } as const - вариант написания без Action Creator Function
-    const action = RemoveTodoListAC(todolistId1)
+    const action = removeTodoListAC(todolistId1)
     const endState = todolistsReducer(startState, action)
 
     // 3. Проверяем, что наши действия (изменения state) соответствуют ожиданию
@@ -51,7 +48,7 @@ test('correct todolist should be added', () => {
     //         id: v1()
     //     },
     // } as const
-    const action = AddTodoListAC('New Todolist', v1())
+    const action = addTodoListAC('New Todolist', v1())
     const endState = todolistsReducer(startState, action)
 
     expect(endState.length).toBe(3)
@@ -76,7 +73,7 @@ test('correct todolist should change its name', () => {
     //         title: 'New Todolist',
     //     },
     // } as const
-    const action = ChangeTodoListTitleAC(todolistId2, 'New Todolist')
+    const action = changeTodoListTitleAC(todolistId2, 'New Todolist')
     const endState = todolistsReducer(startState, action)
 
     expect(endState[0].title).toBe('What to learn')
@@ -100,7 +97,7 @@ test('correct filter of todolist should be changed', () => {
     //     },
     // } as const
     const newFilterValue: FilterValuesType = "completed"
-    const action = ChangeTodoListFilterAC(todolistId2, newFilterValue)
+    const action = changeTodoListFilterAC(todolistId2, newFilterValue)
     const endState = todolistsReducer(startState, action)
 
     expect(endState[0].filter).toBe('all')
