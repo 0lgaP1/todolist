@@ -2,18 +2,20 @@ import {TasksStateType} from "../App";
 import {v1} from "uuid";
 
 type RemoveTaskActionType = {
-    type: "REMOVE-TASK",
+    type: "REMOVE-TASK"
     todolistId: string,
     taskId: string
 }
 
 type AddTaskActionType = {
-    type: "ADD-TASK",
+    type: "ADD-TASK"
     title: string
     todolistId: string
 }
 type ChangeTaskStatusActionType = {
-    type: "CHANGE-TASK-STATUS",
+    type: "CHANGE-TASK-STATUS"
+    isDone: boolean
+    taskId: string
     todolistId: string
 }
 
@@ -40,8 +42,16 @@ export const tasksReducer = (state: TasksStateType, action: ActionsType): TasksS
             return stateCopy;
         }
         case 'CHANGE-TASK-STATUS': {
-            return state
+            const stateCopy = {...state};
+
+            let tasks = stateCopy[action.todolistId];
+            const task = tasks.find(t => t.id === action.todolistId);
+            if (task) {
+                task.isDone = action.isDone;
+            }
+            return stateCopy;
         }
+
         default:
             throw new Error("Don't know this case")
     }
@@ -60,14 +70,13 @@ export const addTaskAC = (title: string, taskId: string, todolistId: string): Ad
         type: "ADD-TASK",
         title,
         todolistId
-
     }
 }
-export const changeTaskStatusAC = (taskId: string, todolistId: string): ChangeTaskStatusActionType => {
+export const changeTaskStatusAC = (taskId: string, isDone: boolean, todolistId: string): ChangeTaskStatusActionType => {
     return {
         type: "CHANGE-TASK-STATUS",
-
+        taskId,
+        isDone,
         todolistId
-
     }
 }
