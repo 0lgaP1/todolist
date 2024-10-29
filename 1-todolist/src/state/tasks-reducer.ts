@@ -19,10 +19,18 @@ type ChangeTaskStatusActionType = {
     todolistId: string
 }
 
+type ChangeTaskTitleActionType = {
+    type: "CHANGE-TASK-TITLE"
+    title: string
+    taskId: string
+    todolistId: string
+}
+
 type ActionsType =
     | RemoveTaskActionType
     | AddTaskActionType
     | ChangeTaskStatusActionType
+    | ChangeTaskTitleActionType
 
 export const tasksReducer = (state: TasksStateType, action: ActionsType): TasksStateType => {
     switch (action.type) {
@@ -45,13 +53,22 @@ export const tasksReducer = (state: TasksStateType, action: ActionsType): TasksS
             const stateCopy = {...state};
 
             let tasks = stateCopy[action.todolistId];
-            const task = tasks.find(t => t.id === action.todolistId);
+            let task = tasks.find(t => t.id === action.todolistId);
             if (task) {
                 task.isDone = action.isDone;
             }
             return stateCopy;
         }
+        case 'CHANGE-TASK-TITLE': {
+            const stateCopy = {...state};
+            let tasks = stateCopy[action.todolistId];
+            let task = tasks.find(t => t.id === action.todolistId);
 
+            if (task) {
+                task.title = action.title;
+            }
+            return stateCopy
+        }
         default:
             throw new Error("Don't know this case")
     }
@@ -77,6 +94,15 @@ export const changeTaskStatusAC = (taskId: string, isDone: boolean, todolistId: 
         type: "CHANGE-TASK-STATUS",
         taskId,
         isDone,
+        todolistId
+    }
+}
+
+export const changeTaskTitleAC = (taskId: string, title: string, todolistId: string): ChangeTaskTitleActionType => {
+    return {
+        type: "CHANGE-TASK-TITLE",
+        taskId,
+        title,
         todolistId
     }
 }

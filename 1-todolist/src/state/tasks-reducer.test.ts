@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {addTaskAC, changeTaskStatusAC, removeTaskAC, tasksReducer} from "./tasks-reducer";
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./tasks-reducer";
 import {TasksStateType} from "../App";
 
 const startState: TasksStateType = {
@@ -45,6 +45,14 @@ test('correct change task status should be done', () => {
     const endState = tasksReducer(startState, action);
 
     expect(endState['todolistId2'][0].id).toBeDefined();
-    expect(endState['todolistId2'][0].isDone).toBe(false);
+    expect(endState['todolistId2'][0].isDone).toBe(true);
 });
 
+test('correct change task title should be saved', () => {
+
+    const action = changeTaskTitleAC('1', "New title", "todolistId2");
+    const endState = tasksReducer(startState, action);
+
+    expect(endState['todolistId2'][0].title).toBe("New title");
+    expect(endState['todolistId2'][1].title).toBe("RTK query");
+});
