@@ -1,6 +1,7 @@
 import {v1} from "uuid";
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./tasks-reducer";
 import {TasksStateType} from "../App";
+import {addTodoListAC} from "./todolists-reducer";
 
 const startState: TasksStateType = {
     'todolistId1': [
@@ -56,3 +57,17 @@ test('correct change task title should be saved', () => {
     expect(endState['todolistId2'][1].title).toBe("New title");
     expect(endState['todolistId1'][0].title).toBe("HTML");
 });
+
+test('new array should be added when new todolist is created', ()=>{
+    const action = addTodoListAC('New todolist', v1());
+    const endState = tasksReducer(startState, action);
+
+    const keys = Object.keys(endState)
+    const newKey = keys.find(k=> k != "todolistId1" && k != "todolistId2");
+    if (!newKey) {
+        throw Error("new key should be added")
+    }
+
+    expect(keys.length).toBe(3);
+    expect(endState[newKey]).toEqual([]);
+})
