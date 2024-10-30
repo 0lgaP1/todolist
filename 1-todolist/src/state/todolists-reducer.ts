@@ -20,6 +20,7 @@ export type ChangeTodolistFilterActionType = {
     id: string,
     filter: FilterValuesType,
 }
+
 type ActionsType =
     | RemoveTodolistActionType
     | AddTodolistActionType
