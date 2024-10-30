@@ -49,10 +49,10 @@ test('correct change task status should be done', () => {
 });
 
 test('correct change task title should be saved', () => {
-
-    const action = changeTaskTitleAC('1', "New title", "todolistId2");
+    const taskId = startState['todolistId2'][1].id;
+    const action = changeTaskTitleAC(taskId, "New title", "todolistId2");
     const endState = tasksReducer(startState, action);
 
-    expect(endState['todolistId2'][0].title).toBe("New title");
-    expect(endState['todolistId2'][1].title).toBe("RTK query");
+    expect(endState['todolistId2'][1].title).toBe("New title");
+    expect(endState['todolistId1'][0].title).toBe("HTML");
 });
