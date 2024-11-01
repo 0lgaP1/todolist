@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import AddBoxIcon from '@mui/icons-material/AddBox'
 
 export type AddTodoListPropsType = {
-    addItem: (title: string) => void;
+    addItem: (title: string, todolistId: string) => void; // ранее принимался 1 аргумент- title
 }
 
 export function AddItemForm(props: AddTodoListPropsType) {
