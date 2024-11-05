@@ -2,6 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {Box, TextField} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import AddBoxIcon from '@mui/icons-material/AddBox'
+import {v1} from "uuid";
 
 export type AddTodoListPropsType = {
     addItem: (title: string, todolistId: string) => void; // ранее принимался 1 аргумент- title
@@ -22,7 +23,8 @@ export function AddItemForm(props: AddTodoListPropsType) {
     const addTaskHandler = () => {
         const trimmedTaskTitle = taskTitle.trim()
         if (trimmedTaskTitle !== "") {
-            props.addItem(taskTitle);
+            const newTodolistId = v1();
+            props.addItem(taskTitle, newTodolistId);
             setError(null);
         } else {
             setError("Title is required")
