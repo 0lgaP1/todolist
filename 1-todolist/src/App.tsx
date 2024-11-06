@@ -17,6 +17,7 @@ import {
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from '@mui/icons-material/Menu'
 import {MenuButton} from "./MenuButton";
+import {changeTodoListTitleAC} from "./state/todolists-reducer";
 //crud:
 //c - create
 //r - read (view mode, filter, sort, search, pagination)
@@ -134,6 +135,18 @@ function App() {
         })
     }
 
+    const changeTodolistTitle = (id: string, title: string) => {
+        // let task = todolistTasks.find(t => t.id === .id);
+        // if (task) {
+        //     .title = action.payload.title;
+        // }
+        // return [...tasks]
+
+        setTodoLists(
+            todoLists.map(tl => tl.id === id ? {...tl, title: title} : tl)
+        );
+    }
+
     type ThemeMode = 'dark' | 'light'
     const [themeMode, setThemeMode] = useState<ThemeMode>('light')
     const theme = createTheme({
@@ -198,6 +211,7 @@ function App() {
                                     changeFilter={changeFilter}
                                     filter={tl.filter}
                                     removeTodolist={removeTodolist}
+                                    changeTodolistTitle={changeTodolistTitle}
                                 />
                             </Paper>
                         </Grid>

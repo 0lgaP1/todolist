@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import {Button} from "./Button";
 import {Box, List, ListItem} from "@mui/material";
-import {FilterValuesType, TaskType} from "./App";
+import {FilterValuesType, TaskType} from "./AppWithReducers";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import IconButton from "@mui/material/IconButton";
@@ -20,6 +20,7 @@ export type TodoListPropsType = {
     changeTaskTitle: (taskId: string, newValue: string, todolistId: string) => void
     changeFilter: (filter: FilterValuesType, todolistId: string) => void
     removeTodolist: (todolistId: string) => void
+    changeTodolistTitle: (id: string, title: string) => void
 }
 
 export function Todolist(props: TodoListPropsType) {
@@ -30,12 +31,17 @@ export function Todolist(props: TodoListPropsType) {
         removeTask,
         changeTaskStatus,
         changeTaskTitle,
-        changeFilter
+        changeFilter,
+        changeTodolistTitle
     } = props;
 
     const onAllClickHandler = () => changeFilter('all', todolistId);
     const onActiveClickHandler = () => changeFilter('active', todolistId);
     const onCompletedClickHandler = () => changeFilter('completed', todolistId);
+
+    const onChangeTodolistTitleHandler = (newTitle: string) => {
+        changeTodolistTitle(todolistId, newTitle); // вызов функции для измен заголовка тудулиста
+    }
     // UI LOGIC:
     const getFilteredTasks = (allTasks: Array<TaskType>, filterValue: FilterValuesType): Array<TaskType> => {
         switch (filterValue) {
@@ -89,7 +95,8 @@ export function Todolist(props: TodoListPropsType) {
     return (
         <div className="todolist">
             <div className={"todolist-title-container"}>
-                <h3>{title}
+                <h3>
+                    <EditableSpan title={title} isDone={false} onChange={onChangeTodolistTitleHandler}/>
                     <IconButton onClick={removeTodolist}>
                         <DeleteIcon/>
                     </IconButton>

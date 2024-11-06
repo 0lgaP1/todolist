@@ -17,7 +17,13 @@ import {
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from '@mui/icons-material/Menu'
 import {MenuButton} from "./MenuButton";
-import {addTodoListAC, changeTodoListFilterAC, removeTodoListAC, todolistsReducer} from "./state/todolists-reducer";
+import {
+    addTodoListAC,
+    changeTodoListFilterAC,
+    changeTodoListTitleAC,
+    removeTodoListAC,
+    todolistsReducer
+} from "./state/todolists-reducer";
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./state/tasks-reducer";
 //crud:
 //c - create
@@ -90,17 +96,23 @@ function App() {
     let removeTodolist = (todolistId: string) => {
         const action = removeTodoListAC(todolistId)
         dispatchTotodolistReducer(action);
+        dispatchToTasksReducer(action)
     }
 
     function addTodolist(title: string, todolistId: string) {
         const action = addTodoListAC(title, todolistId);
         dispatchTotodolistReducer(action);
+        dispatchToTasksReducer(action);
     }
 
     const changeFilter = (filter: FilterValuesType, id: string) => {
         dispatchTotodolistReducer(changeTodoListFilterAC(id, filter))
     };
 
+    const changeTodolistTitle = (id: string, title: string) => {
+        console.log(`Changing title for id: ${id}, new title: ${title}`);
+        dispatchTotodolistReducer(changeTodoListTitleAC(id, title))
+    }
 
 //dark or light theme mode from MUI
 
@@ -168,6 +180,7 @@ function App() {
                                     changeFilter={changeFilter}
                                     filter={tl.filter}
                                     removeTodolist={removeTodolist}
+                                    changeTodolistTitle={changeTodolistTitle}
                                 />
                             </Paper>
                         </Grid>
