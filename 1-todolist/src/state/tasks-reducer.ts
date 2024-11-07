@@ -1,6 +1,6 @@
-import {TasksStateType} from "../App";
+import {TasksStateType} from "../AppWithRedux";
 import {v1} from "uuid";
-import {AddTodolistActionType, RemoveTodolistActionType} from "./todolists-reducer";
+import {AddTodolistActionType, RemoveTodolistActionType, todolistID1, todolistID2} from "./todolists-reducer";
 
 type RemoveTaskActionType = {
     type: "REMOVE-TASK"
@@ -35,7 +35,21 @@ type ActionsType =
     | AddTodolistActionType
     | RemoveTodolistActionType
 
-export const tasksReducer = (state: TasksStateType, action: ActionsType): TasksStateType => {
+const initialState: TasksStateType =  {
+    [todolistID1]: [
+    {id: v1(), title: "HTML", isDone: true},
+    {id: v1(), title: "JS/TS", isDone: true},
+    {id: v1(), title: "React", isDone: false},
+    {id: v1(), title: "Redux", isDone: false},
+    {id: v1(), title: 'Typescript', isDone: false},
+    {id: v1(), title: 'RTK query', isDone: false},
+],
+    [todolistID2]: [
+    {id: v1(), title: 'Typescript', isDone: true},
+    {id: v1(), title: 'RTK query', isDone: true},
+]}
+
+export const tasksReducer = (state: TasksStateType = initialState, action: ActionsType): TasksStateType => {
     switch (action.type) {
         case 'REMOVE-TASK': {
             const stateCopy = {...state};
@@ -83,7 +97,8 @@ export const tasksReducer = (state: TasksStateType, action: ActionsType): TasksS
             return stateCopy
         }
         default:
-            throw new Error("Don't know this case")
+            // throw new Error("Don't know this case")
+            return state;
     }
 }
 

@@ -114,9 +114,7 @@ function App() {
         dispatchTotodolistReducer(changeTodoListTitleAC(id, title))
     }
 
-//dark or light theme mode from MUI
-
-    type ThemeMode = 'dark' | 'light'
+    type ThemeMode = 'dark' | 'light'; //dark or light theme mode from MUI
     const [themeMode, setThemeMode] = useState<ThemeMode>('light')
     const theme = createTheme({
         palette: {

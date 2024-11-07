@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import AppWithReducers from "./AppWithReducers";
+import AppWithRedux from "./AppWithRedux";
+import {store} from "./state/store";
+import {Provider} from "react-redux";
 
 
 const root = ReactDOM.createRoot(
@@ -10,7 +13,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <AppWithReducers />
+      <Provider store={store}> //любая компонента c провайдером имеет право использовать useDispatch, useSelect
+          <AppWithRedux />
+      </Provider>
+
   </React.StrictMode>
 );
 
