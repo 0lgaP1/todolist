@@ -13,13 +13,14 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-      <Provider store={store}> //любая компонента c провайдером имеет право использовать useDispatch, useSelect
+      <Provider store={store}>
           <AppWithRedux />
       </Provider>
 
   </React.StrictMode>
 );
 
+//любая компонента c провайдером имеет право использовать useDispatch, useSelect
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
