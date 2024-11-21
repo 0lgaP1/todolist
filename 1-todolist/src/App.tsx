@@ -17,7 +17,7 @@ import {
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from '@mui/icons-material/Menu'
 import {MenuButton} from "./MenuButton";
-import {changeTodoListTitleAC} from "./state/todolists-reducer";
+
 //crud:
 //c - create
 //r - read (view mode, filter, sort, search, pagination)
@@ -146,7 +146,6 @@ function App() {
             todoLists.map(tl => tl.id === id ? {...tl, title: title} : tl)
         );
     }
-
     type ThemeMode = 'dark' | 'light'
     const [themeMode, setThemeMode] = useState<ThemeMode>('light')
     const theme = createTheme({
@@ -164,6 +163,7 @@ function App() {
     const changeModeHandler = () => {
         setThemeMode(themeMode == 'light' ? 'dark' : 'light')
     }
+
 
     return (
     <ThemeProvider theme={theme}>

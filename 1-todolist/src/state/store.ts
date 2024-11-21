@@ -1,21 +1,21 @@
-import {combineReducers, createStore} from "redux";
-import {tasksReducer} from "./tasks-reducer";
-import {todolistsReducer} from "./todolists-reducer";
-import {TasksStateType} from "../App";
-import {TodoListPropsType} from "../Todolist";
+import { combineReducers, createStore } from "redux";
+import { tasksReducer } from "./tasks-reducer";
+import { todolistsReducer } from "./todolists-reducer";
+import {appReducer} from "../app/app-reducer";
 
+// Комбинируем редьюсеры
 const rootReducer = combineReducers({
     tasks: tasksReducer,
-    todolists: todolistsReducer
+    todolists: todolistsReducer,
+    theme: appReducer,
 });
 
-// type AppRootState = {
-//     todolists: Array<TodoListPropsType>,
-//     tasks: TasksStateType
-// }
+// Определяем тип состояния всего приложения
+export type RootState = ReturnType<typeof rootReducer>;
 
-export type AppRootState = ReturnType<typeof rootReducer>
-export const store = createStore(rootReducer);
+// Создаем store с помощью createStore
+export const store = createStore(rootReducer); //configureStore для redux-toolkit, но тогда нужно переписывать редьюсеры с использованием createSlice
 
+// Делаем стор доступным через окно для отладки
 // @ts-ignore
-window.store = store
+window.store = store;

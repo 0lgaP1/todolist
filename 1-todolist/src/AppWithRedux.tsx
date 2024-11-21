@@ -6,7 +6,6 @@ import {AddItemForm} from "./AddItemForm";
 import {
     AppBar,
     Container,
-    createTheme,
     CssBaseline,
     Grid,
     Paper,
@@ -22,11 +21,12 @@ import {
     changeTodoListFilterAC,
     changeTodoListTitleAC,
     removeTodoListAC,
-    todolistsReducer
 } from "./state/todolists-reducer";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./state/tasks-reducer";
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootState} from "./state/store";
+import {RootState} from "./state/store";
+import {changeThemeAC, ThemeMode} from "./app/app-reducer";
+import {getTheme} from "./common/theme/theme";
 //crud:
 //c - create
 //r - read (view mode, filter, sort, search, pagination)
@@ -56,9 +56,9 @@ function AppWithRedux() {
 
 
     const dispatch = useDispatch();//react-redux
-    const todolists = useSelector<AppRootState, Array<TodoListType>>( state => state.todolists )
-    const tasks = useSelector<AppRootState, TasksStateType>( state => state.tasks )
-
+    const todolists = useSelector<RootState, Array<TodoListType>>( (state: RootState) => state.todolists )
+    const tasks = useSelector<RootState, TasksStateType>( (state: RootState) => state.tasks )
+    const themeMode = useSelector<RootState, ThemeMode>((state: RootState) => state.theme.themeMode)
     // const tasks = useReducer(tasksReducer, {
     //     [todolist1]: [
     //         {id: v1(), title: "HTML", isDone: true},
@@ -118,24 +118,10 @@ function AppWithRedux() {
         console.log(`Changing title for id: ${id}, new title: ${title}`);
         dispatch(changeTodoListTitleAC(id, title))
     }
-
-    type ThemeMode = 'dark' | 'light'; //dark or light theme mode from MUI
-    const [themeMode, setThemeMode] = useState<ThemeMode>('light')
-    const theme = createTheme({
-        palette: {
-            mode: themeMode === 'light' ? 'light' : 'dark',
-            primary: {
-                main: '#087EA4',
-            },
-
-            secondary: {
-                main: 'rgba(32,56,238,0.55)'
-            }
-        }
-    })
+    const theme = getTheme(themeMode);
     const changeModeHandler = () => {
-        setThemeMode(themeMode == 'light' ? 'dark' : 'light')
-    }
+        dispatch(changeThemeAC(themeMode === 'light' ? 'dark' : 'light'));
+    };
 
     return (
     <ThemeProvider theme={theme}>
@@ -159,14 +145,14 @@ function AppWithRedux() {
                     <AddItemForm addItem={addTodolist}/>
                 </Grid>
                 <Grid container spacing={5}>
-                    {todolists.map(todolist => {
+                    {todolists.map((todolist: TodoListType) => {
                         const allTodolistTasks = tasks[todolist.id]
                         let tasksForTodolist = allTodolistTasks
                         if (todolist.filter === 'active') {
-                            tasksForTodolist = allTodolistTasks.filter(task => !task.isDone)
+                            tasksForTodolist = allTodolistTasks.filter((task: TaskType) => !task.isDone)
                         }
                         if (todolist.filter === 'completed') {
-                            tasksForTodolist = allTodolistTasks.filter(task => task.isDone)
+                            tasksForTodolist = allTodolistTasks.filter((task: TaskType) => task.isDone)
                         }
 
                         return <Grid item>
