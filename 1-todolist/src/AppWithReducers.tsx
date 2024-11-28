@@ -1,8 +1,8 @@
 import React, {useReducer, useState} from 'react';
 import './App.css';
-import {Todolist} from "./Todolist";
+import {Todolist} from "./features/todolists/ui/Todolists/Todolist/Todolist";
 import {v1} from "uuid";
-import {AddItemForm} from "./AddItemForm";
+import {AddItemForm} from "./common/components/AddItemForm";
 import {
     AppBar,
     Container,

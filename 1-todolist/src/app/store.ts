@@ -1,7 +1,7 @@
 import { combineReducers, createStore } from "redux";
-import { tasksReducer } from "./tasks-reducer";
-import { todolistsReducer } from "./todolists-reducer";
-import {appReducer} from "../app/app-reducer";
+import { tasksReducer } from "../state/tasks-reducer";
+import { todolistsReducer } from "../state/todolists-reducer";
+import {appReducer} from "./app-reducer";
 
 // Комбинируем редьюсеры
 const rootReducer = combineReducers({

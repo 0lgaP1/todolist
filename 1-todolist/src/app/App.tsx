@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import './App.css';
-import {Todolist} from "./Todolist";
+import '../App.css';
+import {Todolist} from "../features/todolists/ui/Todolists/Todolist/Todolist";
 import {v1} from "uuid";
-import {AddItemForm} from "./AddItemForm";
+import {AddItemForm} from "../common/components/AddItemForm";
 import {
     AppBar,
     Container,
@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from '@mui/icons-material/Menu'
-import {MenuButton} from "./MenuButton";
+import {MenuButton} from "../MenuButton";
 
 //crud:
 //c - create

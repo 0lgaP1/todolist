@@ -5,7 +5,7 @@ import {
     FilterValuesType,
     removeTodoListAC,
     TodoListType
-} from "./state/todolists-reducer";
+} from "../../../../state/todolists-reducer";
 import {
     addTaskAC,
     changeTaskStatusAC,
@@ -13,11 +13,11 @@ import {
     removeTaskAC,
     TasksStateType,
     TaskType
-} from "./state/tasks-reducer";
+} from "../../../../state/tasks-reducer";
 import {Grid, Paper} from "@mui/material";
-import {Todolist} from "./Todolist";
+import {Todolist} from "./Todolist/Todolist";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "./state/store";
+import {RootState} from "../../../../app/store";
 import {v1} from "uuid";
 
 const Todolists = () => {

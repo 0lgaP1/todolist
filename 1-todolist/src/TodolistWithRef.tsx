@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import {Button} from "./Button";
-import {FilterValuesType} from "./App"
+import {FilterValuesType} from "./app/App"
 export type TodoListPropsType = {
     title?: string
     tasks?: TaskType[]

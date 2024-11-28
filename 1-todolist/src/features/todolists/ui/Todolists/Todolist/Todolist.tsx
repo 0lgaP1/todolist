@@ -1,13 +1,13 @@
 import React, {ChangeEvent} from 'react';
-import {Button} from "./Button";
+import {Button} from "../../../../../Button";
 import {Box, List, ListItem} from "@mui/material";
-import {FilterValuesType, TaskType} from "./AppWithReducers";
-import {AddItemForm} from "./AddItemForm";
-import {EditableSpan} from "./EditableSpan";
+import {FilterValuesType, TaskType} from "../../../../../AppWithReducers";
+import {AddItemForm} from "../../../../../common/components/AddItemForm";
+import {EditableSpan} from "../../../../../common/components/EditableSpan";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete"
 import {Checkbox} from "@mui/material";
-import {filterButtonsContainerSx, getListItemSx} from "./Todolist.styles";
+import {filterButtonsContainerSx, getListItemSx} from "../../../../../Todolist.styles";
 
 export type TodoListPropsType = {
     title: string

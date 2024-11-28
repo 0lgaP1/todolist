@@ -2,11 +2,11 @@ import React from 'react';
 import {AppBar, Switch, Toolbar} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import {MenuButton} from "./MenuButton";
-import {getTheme} from "./common/theme/theme";
-import {changeThemeAC, ThemeMode} from "./app/app-reducer";
+import {MenuButton} from "../../MenuButton";
+import {getTheme} from "../theme/theme";
+import {changeThemeAC, ThemeMode} from "../../app/app-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "./state/store";
+import {RootState} from "../../app/store";
 
 export const Header = () => {
     const dispatch = useDispatch();//react-redux

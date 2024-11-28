@@ -1,12 +1,12 @@
 import React from 'react';
 import {Container, Grid, Paper} from "@mui/material";
-import {AddItemForm} from "./AddItemForm";
+import {AddItemForm} from "../common/components/AddItemForm";
 import {useDispatch} from "react-redux";
 
 import {
     addTodoListAC,
-} from "./state/todolists-reducer";
-import Todolists from "./Todolists";
+} from "../state/todolists-reducer";
+import Todolists from "../features/todolists/ui/Todolists/Todolists";
 
 export const Main = () => {
     const dispatch = useDispatch();//react-redux

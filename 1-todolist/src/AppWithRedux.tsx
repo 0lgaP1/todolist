@@ -2,11 +2,11 @@ import React from 'react';
 import './App.css';
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import {useSelector} from "react-redux";
-import {RootState} from "./state/store";
+import {RootState} from "./app/store";
 import {ThemeMode} from "./app/app-reducer";
 import {getTheme} from "./common/theme/theme";
-import Header from "./Header";
-import Main from "./Main";
+import Header from "./common/components/Header";
+import Main from "./app/Main";
 
 const AppWithRedux = () => {
 
